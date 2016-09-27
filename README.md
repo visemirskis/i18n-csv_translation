@@ -24,7 +24,76 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Export translations into one csv file
+
+Write in a (Rails) console or script:
+
+```ruby
+  require "i18n/csv-translation"
+
+  exporter = I18n::CsvTranslation::Exporter.new
+  exporter.export(path: "path-to-your-locales-directory", output: "my_translations.csv", files: "*.yml")
+```
+
+Note: The gem expects only one locale in each file. If you want to export only English to have it translated you can either
+give a files param like `files: "en.*.yml"` or use a block (see below) to determine if the files content should be processed.
+
+If you wish a different csv column separator give it as option:
+
+```ruby
+  I18n::CsvTranslation::Exporter.new(col_sep: "\t")
+```
+
+With a block you can decide if the translation file should be processed
+
+```ruby
+  exporter.export(path: "path-to-your-locales-directory", output: "my_translations.csv") do |file|
+    !file.include? "admin"
+  end
+```
+
+Ignores all files with "admin" in the name.
+
+### Import translations from csv
+
+Given you got a csv with translated values for a new locale, lets say German.
+
+The import process works only if the first two columns on the csv file haven't been
+touched by the translaters. The first column holds the file name of the original
+translation file, without the locale. The second one is the translation key,
+again without locale.
+
+Creating new translation files can be done like this:
+
+```ruby
+  require "i18n/csv-translation"
+
+  importer = I18n::CsvTranslation::Importer.new
+  importer.import input: "path_to_translated_csv_file", path: "path_for_new_translation_files", new_locale: "de"
+```
+
+Given you had two English translation files:
+
+```
+  config/locales/en.users.yml
+  config/locales/en.addresses.yml
+```
+
+After the import you would have these two new German translation files:
+
+```
+  de.users.yml
+  de.addresses.yml
+```
+
+With all keys and values in their respective files, e.g. "de.users.name" in de.users.yml,
+"de.addresses.street" in de.addresses.yml.
+
+The translated csv file has a custom col sep?
+
+```ruby
+  importer = I18n::CsvTranslation::Importer.new(col_sep: "\t")
+```
 
 ## Development
 
