@@ -95,6 +95,12 @@ The translated csv file has a custom col sep?
   importer = I18n::CsvTranslation::Importer.new(col_sep: "\t")
 ```
 
+## TODO
+
+- Option for the locale to be exported instead of files param. Would load all yml files but process only thos with a distinct locale.
+- Remove YAML header from new translation files (optionally)
+- Option for verbose output (which file processed, which keys, etc...)
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
