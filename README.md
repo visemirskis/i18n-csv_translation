@@ -6,10 +6,12 @@ This gem allows you to export all i18n keys and values to one CSV file. With thi
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile in the development group because you will need it only locally:
 
 ```ruby
-gem "i18n-csv_translation", require: false
+group :development do
+  gem "i18n_csv", require: false
+end
 ```
 
 And then execute:
