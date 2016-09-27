@@ -1,8 +1,8 @@
 # I18n::CsvTranslation
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/i18n/csv_translation`. To experiment with that code, run `bin/console` for an interactive prompt.
+Ever needed to add a new locale to an existing (Rails) project with dozens of .yml files? Too afraid to give all files to the customer or translation service and hope they do not mess up the YAML format?
 
-TODO: Delete this and the text above, and describe your gem
+This gem allows you to export all i18n keys and values to one CSV file. With this the values can be easily translated and later reimported into your project. The new translations are saved in a filename similar to the original one (only the locale is replaced).
 
 ## Installation
 
@@ -28,12 +28,9 @@ TODO: Write usage instructions here
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/swelther/i18n-csv_translation.
-
 
 ## License
 
