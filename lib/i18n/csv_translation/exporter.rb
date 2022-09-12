@@ -72,7 +72,7 @@ module I18n::CsvTranslation
     end
 
     def output_filename file, old_locale
-      File.dirname(file).gsub(Rails.root.to_s + '/', '') + '/' + File.basename(file).gsub("#{old_locale}.", '')
+      (File.dirname(file) + '/').gsub(current_path.join(@path).to_s, '') + File.basename(file).gsub("#{old_locale}.", '')
     end
 
     def yml_locale yml
