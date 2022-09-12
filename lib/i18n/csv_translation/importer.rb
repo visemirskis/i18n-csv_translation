@@ -44,6 +44,9 @@ module I18n::CsvTranslation
           hash = {}
 
           value.each do |inner_key, inner_value|
+            if inner_value && inner_value.start_with?('[') && inner_value.ends_with?(']')
+              inner_value = eval(inner_value)
+            end
             a = inner_key.split(".").reverse.inject(inner_value) { |a, n| { n => a } }
             hash.deep_merge! a
           end
