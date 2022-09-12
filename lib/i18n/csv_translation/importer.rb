@@ -37,7 +37,8 @@ module I18n::CsvTranslation
     def save_translations_as_yaml translations
       translations.each do |key, value|
         unless key.nil?
-          filename = Pathname.new(@path).join("#{@new_locale}." + Pathname.new(key).basename.to_s)
+          filename = Pathname.new(@path).join(key.gsub(/yml$/, "#{@new_locale}.yml"))
+          FileUtils.mkdir_p(File.dirname(filename))
           file = File.open(filename, "w")
 
           hash = {}
@@ -47,8 +48,7 @@ module I18n::CsvTranslation
             hash.deep_merge! a
           end
 
-          # TODO Add option to omit "header"
-          file.write(hash.to_yaml)
+          file.write(hash.to_yaml.gsub(/^---\n/, ''))
 
           file.close
         end
