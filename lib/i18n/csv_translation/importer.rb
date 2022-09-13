@@ -3,8 +3,9 @@ require "deep_merge"
 
 module I18n::CsvTranslation
   class Importer
-    def initialize col_sep: ";"
+    def initialize col_sep: ";", headers: false
       @col_sep = col_sep
+      @headers = headers
     end
 
     def import input:, path:, new_locale:
@@ -21,7 +22,7 @@ module I18n::CsvTranslation
     def load_translations_from_csv
       translations = {}
 
-      CSV.foreach(@input, col_sep: @col_sep) do |csv|
+      CSV.foreach(@input, col_sep: @col_sep, headers: @headers) do |csv|
         unless csv[1].nil? && csv[2].nil?
           if translations[csv[0]].nil?
             translations[csv[0]] = { key_with_locale(csv[1]) => csv[2] }
